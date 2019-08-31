@@ -12,6 +12,7 @@ async function get(courseID) {
 
   let description = $('span.course-description').text().trim();
 
+  //creator is not shown on main course page when not logged in
   let levelProbe = cheerio.load(await rp(URLBASE + '/course/' + courseID + '1/'));
   let creator = levelProbe('a.creator-name > span').text();
 
