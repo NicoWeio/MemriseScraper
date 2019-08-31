@@ -12,6 +12,8 @@ async function get(courseID) {
 
   let description = $('span.course-description').text().trim();
 
+  let image = $('a.course-photo > img')[0].attribs.src;
+
   //creator is not shown on main course page when not logged in
   let levelProbe = cheerio.load(await rp(URLBASE + '/course/' + courseID + '1/'));
   let creator = levelProbe('a.creator-name > span').text();
@@ -42,6 +44,7 @@ async function get(courseID) {
   return {
     description,
     creator,
+    image,
     items
   };
 }
