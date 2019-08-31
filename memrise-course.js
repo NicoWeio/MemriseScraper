@@ -16,7 +16,11 @@ async function get(courseID) {
 
   //creator is not shown on main course page when not logged in
   let levelProbe = cheerio.load(await rp(URLBASE + '/course/' + courseID + '1/'));
-  let creator = levelProbe('a.creator-name > span').text();
+  let creator = {
+    name: levelProbe('a.creator-name > span').text(),
+    image: levelProbe('a.creator-image > img')[0].attribs.src
+  };
+  console.log(creator);
 
   let items = [];
   let elements = $('a.level', html);
